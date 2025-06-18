@@ -1,0 +1,52 @@
+{% extends "seeker/home.html" %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<style>
+    .div-container{
+        width: 70%;
+        margin-left: 15%;
+
+    }
+</style>
+<div class="div-container">
+    <form method="post" enctype="multipart/form-data">
+        {%csrf_token%}
+        <table class="table table-bordered">
+            <tr>
+                <td>First Name</td>
+                <td><input type="text" name="firstname" class="form-control" required></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><input type="text" name="lastname" class="form-control" required></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="email" class="form-control" required></td>
+            </tr>
+            <tr>
+                <td>Ph No</td>
+                <td><input type="number" name="phno" class="form-control" required></td>
+            </tr>
+            <tr>
+                <td>Upload Resume</td>
+                <td><input type="file" name="resume_upload" class="form-control" required></td>
+            </tr>
+            <tr>
+                <td>Job Id</td>
+                <td><input type="number" name="jobid" value="{{job.id}}" class="form-control" ></td>
+            </tr>
+            <tr>
+                <input type="hidden" value="{{request.session.user_name}}" name="user_name">
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">
+                   <input type="submit" value="Apply" class="btn btn-rounded">
+               </td>
+             </tr>
+        </table>
+    </form>
+
+</div>
+{%endblock%}

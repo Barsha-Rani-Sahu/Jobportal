@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Portal</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .panel-body {
+            background-color: rgb(243, 243, 246);
+            font-size: 16px; 
+            padding: 20px;    
+        }
+        .job-panel {
+            margin-bottom: 20px;
+        }
+       
+        .panel-footer {
+            margin-left: 50px;
+        }
+
+        .navbar {
+            background-color: #f8f9fa; 
+        }
+        .navbar-brand img {
+            width: 80px;
+            height: auto;
+            margin-right: 10px;
+        }
+        .navbar-nav .nav-item {
+            margin-right: 30px;
+        }
+        .navbar-nav .nav-link {
+            font-weight: 500; 
+        }
+        .navbar-nav .nav-item.active .nav-link {
+            color: #0056b3; 
+            font-weight: bold;
+        }
+        .dropdown-menu {
+            min-width: 150px; 
+        }
+        .btn-rounded {
+            border-radius: 25px; 
+            background-color: #0056b3; 
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+            
+        }
+        .card {
+            border: none; 
+            background-color: #f8f9fa; 
+        }
+        .card-footer h6 {
+            margin-top: 10px;
+            color: #007bff; 
+        }
+        footer {
+            background-color: transparent; 
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">
+            <img src="/static/images/logo.jpg" alt="logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Jobs
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {% for name in catname %}
+                        <a class="dropdown-item" href="/job_filter/{{name.Category_name}}">{{name.Category_name }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/fresher_jobs">Entry-Level Jobs</a>
+                </li>
+                {% if 'user_name' in request.session %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <b>{{request.session.user_name}}</b>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/my_profile">My Profile</a>
+                        <a class="dropdown-item" href="/applied_job">Applied Job</a>
+                        <a class="dropdown-item" href="/bookmark">Bookmark</a>
+                        <a class="dropdown-item" href="/user_logout">Logout</a>
+                    </div>
+                </li>
+                {% else %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Login
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/recruiter_login">Job Recruiter</a>
+                        <a class="dropdown-item" href="/seeker_login">Job Seeker</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        SignUp
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/recruiter_register">Job Recruiter</a>
+                        <a class="dropdown-item" href="/seeker_register">Job Seeker</a>
+                    </div>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    {% block header %}
+    <div class="jumbotron text-center header-jumbotron">
+    </div>
+    {% endblock %}
+
+    {% block content %}
+    {% if latest_jobs %}
+    <h2 class="text-center">Latest Jobs</h2>
+    <div class="container">
+        <div class="row">
+            {% for latest in latest_jobs %}
+            <div class="col-md-6 col-lg-4 job-panel mb-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        Posted on {{ latest.Start_date }}
+                        <a href="{% url 'saved_jobs' latest.id %}" class="float-right">
+                            <i class="far fa-bookmark bookmark-icon"></i>
+                        </a>
+                    </div>
+                    
+                    <div class="card-body text-center">
+                        {% if latest.image_url %}
+                        <img src="{{ latest.image_url.url }}" alt="Job Image" style="max-width: 100px; height: auto;"><br>
+                        {% endif %}
+                        <h5 class="card-title">{{ latest.Job_Title }}</h5>
+                        <p class="card-text">{{ latest.CompanyName }}</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="/view_job_details/{{ latest.id }}" class="btn btn-rounded">View Details</a>
+                        <a href="/apply/{{ latest.id }}" class="btn btn-rounded">Apply</a>
+                        <h6><i class="fas fa-clock"></i> Recently added</h6>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+
+   
+    <div class="container">
+        <div class="row">
+            {% for job in jobs %}
+            <div class="col-md-6 col-lg-4 job-panel mb-4">
+                <div class="card">
+                    <div class="card-header text-left">
+                        Posted on {{ job.Start_date }}
+                            <form method="post" action="{% url 'saved_jobs' job.id %}">
+                                {% csrf_token %}
+                                <button class="btn p-0 m-0" type="submit">
+                                    <span class="far fa-bookmark bookmark-icon"></span> 
+                                </button>
+                            </form>
+                    </div>
+                   
+                    <div class="card-body text-center">
+                        {% if job.image_url %}
+                        <img src="{{ job.image_url.url }}" alt="Job Image" style="max-width: 100px; height: auto;"><br>
+                        {% endif %}
+                        <h5 class="card-title">{{ job.Job_Title }}</h5>
+                        <p class="card-text">{{ job.CompanyName }}</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="/view_job_details/{{job.id}}" class="btn btn-rounded">View Details</a>
+                        <a href="/apply/{{job.id}}" class="btn btn-rounded">Apply</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock %}
+
+    <footer class="text-center py-4">
+        <p>&copy; 2024 Job Portal. All rights reserved.</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

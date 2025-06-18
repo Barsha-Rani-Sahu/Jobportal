@@ -1,0 +1,40 @@
+{% extends "recruiter/recruiter_home.html" %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<style>
+    .panel-body {
+        background-color: rgb(243, 243, 246);
+        font-size: 16px; 
+        padding: 20px;    
+    }
+    .job-panel {
+        margin-bottom: 20px;
+    }
+    .panel {
+        border: 2px solid #007bff;  
+        border-radius: 10px;        
+    }
+    .btn-big {
+      font-size: 20px; 
+      padding: 5px 20px; 
+      
+    }
+</style>
+<br><br><br>
+<div class="container">  
+    <div class="row">
+        {% for job in jobs %}
+        <div class="col-md-6 col-lg-4 job-panel">
+            <div class="panel panel-primary">
+                <center><div class="panel-heading">Posted on {{ job.Start_date }}</div></center> <br>
+                <center><div class="panel-body"><img src="{{ job.image_url.url }}" alt="Job Image" style="max-width: 100px; height: auto;"><br>
+                    <br> <b>{{ job.Job_Title }}</b></div><br></center>
+                <center><div class="panel-footer"><a href="/view_details/{{job.id}}"><button class="btn btn-primary btn-big">View Details</button></a></div></center>
+                <br>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div><br><br>
+{% endblock %}

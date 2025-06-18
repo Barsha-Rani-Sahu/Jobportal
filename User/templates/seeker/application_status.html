@@ -1,0 +1,25 @@
+{% extends "seeker/home.html" %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<body><br><br>
+    <table class="table table-bordered">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Resume</th>
+        </tr>
+        {% for s in status %}
+        <tr>
+            <td>{{ s.First_Name }}</td>
+            <td>{{ s.Last_Name }}</td>
+            <td>{{ s.Email }}</td>
+            <td>{{ s.PhNo }}</td>
+            <td>  <a href="{{ s.resume.url }}" >Download Resume</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body><br><br><br><br>
+{%endblock%}

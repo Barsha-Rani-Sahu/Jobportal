@@ -1,0 +1,50 @@
+{% extends "seeker/home.html" %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <center>
+        <table class="table table-bordered">
+       
+         <tr>
+            <td colspan="2" style="text-align: center;">
+               <img src="{{ job.image_url.url }}" alt="Job Image" style="width: 90px; height: 90px;" ></td>
+         </tr>
+         <tr>
+            <td>Job ID</td>
+            <td>{{job.id}}</td>
+            <input type="hidden" name="job id" value="{{job.id}}"/>
+        </tr>
+         <tr>
+            <td> Company Name</td>
+            <td>{{job.CompanyName}}</td>
+         </tr>
+         <tr>
+            <td>Job Title</td>
+            <td>{{job.Job_Title}}</td>
+         </tr>
+         <tr>
+            <td>Responsibility</td>
+            <td>{{job.Responsibility}}</td>
+         </tr>
+         <tr>
+            <td>Experience</td>
+            <td>{{job.Experience}}</td>
+         </tr>
+         <tr>
+            <td>Salary</td>
+            <td>{{job.Salary}}</td>
+         </tr>
+         <tr>
+            <td>Start_date</td>
+            <td>{{job.Start_date}}</td>
+         </tr>
+         <tr>
+            <td>End_date</td>
+            <td>{{job.End_date}}</td>
+         </tr>
+         <tr> <td colspan="2" class="text-center"><a href="/apply/{{job.id}}" class="btn btn-rounded">Apply</a></td></tr>
+        </table>
+    </center>
+</div>
+{%endblock%}

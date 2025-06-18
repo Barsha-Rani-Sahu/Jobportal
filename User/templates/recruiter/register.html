@@ -1,0 +1,38 @@
+{% extends "recruiter/recruiter_home.html" %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<style>
+   .div-container{
+       width: 70%;
+       margin-left: 15%;
+
+   }
+</style>
+<div class="div-container"><br><br><br>
+    <form method="post" >
+        {%csrf_token%}
+     <center>
+        <table class="table table-bordered">
+         <tr>
+            <td>Company Name</td>
+            <td><input type="text" name="Company_Name" class="form-control" required></td>
+         </tr>
+         <tr>
+            <td>Company Email</td>
+            <td><input type="email" name="Email" class="form-control" required></td>
+         </tr>
+         <tr>
+            <td>Password</td>
+            <td><input type="password" name="Password" class="form-control" required></td>
+         </tr>
+         <tr>
+            <td colspan="2" class="text-center">
+               <input type="submit" value="SignUp" class="btn btn-primary btn-big">
+           </td>
+         </tr>
+        </table>
+    </center>
+    </form>
+   </div><br><br><br><br><br>
+{%endblock%}

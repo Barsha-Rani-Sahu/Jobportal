@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Portal</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    .navbar{
+        margin-right: 20px;
+    }
+    .btn-big {
+      font-size: 20px; 
+      padding: 5px 40px; 
+      
+    }
+
+        
+</style>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img src="/static/images/logo.jpg" alt="logo" style="width: 70px;height: 70px;">
+        <a class="navbar-brand" href="#">Job Portal</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/recruiter_home">Home </a>
+                </li>
+                <li class="nav-item">
+                    {%if 'company_name' in request.session%}
+                    <li class="list-group-item"><b>Welcome {{request.session.company_name}}</b></li>
+                    {%else%}
+                    <li class="list-group-item">Profile</li>
+                    {%endif%}
+                </li>
+                 <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+
+                 </li>
+            </ul>
+        </div>
+    </nav>
+
+   {% block header%}
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Welcome to Job Portal</h1>
+        <p class="lead">Find your dream job here.</p>
+        
+    </div>
+    {%endblock%}
+
+    <!-- Main Content -->
+     {% block content%}
+    <div class="container">  
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="panel panel-primary">
+              <center><div class="panel-heading">POST JOB</div></center>
+              <div class="panel-body"></div><br>
+              <center><div class="panel-footer"><a href="/post_job"><button class="btn btn-primary btn-big">Post</button></a></div></center>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="panel panel-primary">
+            <center><div class="panel-heading">APPLICANT</div></center>
+            <div class="panel-body"></div><br>
+            <center><div class="panel-footer"><a href="/applicant_details"><button class="btn btn-primary btn-big">View</button></a></div></center>
+            </div>
+          </div>
+            
+          <div class="col-sm-4">
+            <div class="panel panel-primary">
+            <center><div class="panel-heading">POSTED JOBS</div></center>
+            <div class="panel-body"></div><br>
+            <center><div class="panel-footer"><a href="/posted_jobs"><button class="btn btn-primary btn-big">View</button></a></div></center>
+            </div>
+          </div>
+       </div>
+    </div><br><br><br><br><br>
+
+    {%endblock%}
+   
+ 
+    <footer class="bg-light text-center py-4">
+        <p>&copy; 2024 Job Portal. All rights reserved.</p>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+{% extends "seeker/home.html" %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<style>
+   .div-container{
+       width: 70%;
+       margin-left: 15%;
+   }
+</style>
+
+<div class="div-container"><br><br>
+    <form method="post">
+        {% csrf_token %}
+        <center>
+            <table class="table table-bordered">
+
+                {% for user in edit%}
+                <tr>
+                    <td><input type="hidden" value="{{request.session.user_name}}" name="user_name"></td>
+                </tr>
+                <tr>
+                    <td>Full Name</td>
+                    <td><input type="text" name="full_name" class="form-control" value="{{user.full_name}}" required></td>
+                </tr>
+                <tr>
+                    <td>Date of Birth</td>
+                    <td><input type="date" name="date_of_birth" class="form-control" value="{{user.date_of_birth}}" required></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        <select name="gender" class="form-control" value="{{user.gender}}" required>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nationality</td>
+                    <td><input type="text" name="nationality" class="form-control"  value="{{user.nationality}}" required></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td><input name="address" class="form-control"  value="{{user.address}}" required></td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td><input type="tel" name="phone_number" class="form-control" value="{{user.phone_number}}" required></td>
+                </tr>
+                <tr>
+                    <td>Email Address</td>
+                    <td><input type="email" name="email" class="form-control" value="{{user.email}}" required></td>
+                </tr>
+                <tr>
+                    <td>Job Status</td>
+                    <td>
+                        <select name="job_status" class="form-control"  value="user.job_status" required>
+                            <option value="fresher">Fresher</option>
+                            <option value="working">Working</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Job Title</td>
+                    <td><input type="text"  name="job_title" class="form-control" value="{{user.job_title}}"></td>
+                </tr>
+                <tr >
+                    <td>Company Name</td>
+                    <td><input type="text"  name="company_name" class="form-control"  value="{{user.company_name}}"></td>
+                </tr>
+                <tr>
+                    <td>Highest Degree Obtained</td>
+                    <td><input type="text" name="highest_degree" class="form-control" value="{{user.highest_degree_obtained}}" required></td>
+                </tr>
+                <tr>
+                    <td>Major Field of Study</td>
+                    <td><input type="text" name="major_field_of_study" class="form-control" value="{{user.major_field_of_study}}" required></td>
+                </tr>
+                <tr>
+                    <td>Institution Name</td>
+                    <td><input type="text" name="institution_name" class="form-control" value="{{user.institution_name}}" required></td>
+                </tr>
+                <tr>
+                    <td>Graduation Year</td>
+                    <td><input type="number" name="graduation_year" class="form-control" value="{{user.graduation_year}}" required></td>
+                </tr>
+                <tr>
+                    <td>Technical Skills</td>
+                    <td><input name="technical_skills" class="form-control" value="{{user.technical_skills}}" required></td>
+                </tr>
+                <tr>
+                    <td>Soft Skills</td>
+                    <td><input name="soft_skills" class="form-control"  value="{{user.soft_skills}}" required></td>
+                </tr>
+                <tr>
+                    <td>Hobbies</td>
+                    <td><input name="hobbies" class="form-control" value="{{user.hobbies}}" required></td>
+                </tr>
+                <tr>
+                    <td>Interests</td>
+                    <td><input name="interests" class="form-control" value="{{user.interests}}" required></td>
+                </tr>
+                <tr>
+                    <td>Languages Spoken</td>
+                    <td><input name="languages_spoken" class="form-control" value="{{user.languages_spoken}}" required></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <input type="submit" value="Submit" class="btn btn-rounded">
+                    </td>
+                 
+                </tr>
+                {%endfor%}
+            </table>
+        </center>
+    </form>
+</div><br><br>
+{%endblock%}

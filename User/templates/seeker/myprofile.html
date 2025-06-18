@@ -1,0 +1,108 @@
+{% extends "seeker/home.html" %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<style>
+   .div-container{
+       width: 70%;
+       margin-left: 15%;
+   }
+</style>
+<div class="div-container"><br><br>
+<table class="table table-bordered">
+   {% for user in profile%}
+
+    <tr>
+        <td>Full Name</td>
+        <td>{{user.full_name}}</td>
+    </tr>
+    <tr>
+        <td>Date of Birth</td>
+        <td>{{user.date_of_birth}}</td>
+    </tr>
+    <tr>
+        <td>Gender</td>
+        <td>
+            {{user.gender}}
+        </td>
+    </tr>
+    <tr>
+        <td>Nationality</td>
+        <td>{{user.nationality}}</td>
+    </tr>
+    <tr>
+        <td>Address</td>
+        <td>{{user.address}}</td>
+    </tr>
+    <tr>
+        <td>Phone Number</td>
+        <td>{{user.phone_number}}</td>
+    </tr>
+    <tr>
+        <td>Email Address</td>
+        <td>{{user.email}}</td>
+    </tr>
+    <tr>
+        <td>Job Status</td>
+        <td>
+            {{user.job_status}}
+        </td>
+    </tr>
+    <tr>
+        <td>Job Title</td>
+        <td>{{user.job_title}}</td>
+    </tr>
+    <tr >
+        <td>Company Name</td>
+        <td>{{user.company_name}}</td>
+    </tr>
+    <tr>
+        <td>Highest Degree Obtained</td>
+        <td>{{user.highest_degree}}</td>
+    </tr>
+    <tr>
+        <td>Major Field of Study</td>
+        <td>{{user.major_field_of_study}}</td>
+    </tr>
+    <tr>
+        <td>Institution Name</td>
+        <td>{{user.institution_name}}</td>
+    </tr>
+    <tr>
+        <td>Graduation Year</td>
+        <td>{{user.graduation_year}}</td>
+    </tr>
+    <tr>
+        <td>Technical Skills</td>
+        <td>{{user.technical_skills}}</td>
+    </tr>
+    <tr>
+        <td>Soft Skills</td>
+        <td>{{user.soft_skills}}</td>
+    </tr>
+    <tr>
+        <td>Hobbies</td>
+        <td>{{user.hobbies}}</td>
+    </tr>
+    <tr>
+        <td>Interests</td>
+        <td>{{user.interests}}</td>
+    </tr>
+    <tr>
+        <td>Languages Spoken</td>
+        <td>{{user.languages_spoken}}</td>
+    </tr>
+
+    <tr>
+        <td colspan="2" class="text-center">
+            <a href="/profile_edit/{{user.id}}"><button class="btn btn-rounded">Edit</button></a> 
+        </td>
+     
+    </tr>
+    {%endfor%}
+</table>
+</div>
+
+
+</div><br><br>
+{%endblock%}

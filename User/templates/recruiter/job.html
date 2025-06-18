@@ -1,0 +1,82 @@
+{% extends "recruiter/recruiter_home.html" %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container mt-5">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table class="table table-bordered">
+                <tr>
+                    <td>Comapny Name</td>
+                    <td colspan="2" class="text-center">
+                        <input type="text" readonly class="form-control" value="{{ request.session.company_name }}"
+                            placeholder="Company Name">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Job Title</td>
+                    <td><input type="text" name="Job_Title" class="form-control" placeholder="Job Title" required></td>
+                </tr>
+                <tr>
+                    <td>Responsibility</td>
+                    <td><input type="text" name="responsibility" class="form-control" placeholder="Responsibility" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Experience</td>
+                    <td><input type="number" name="Experience" class="form-control" placeholder="Experience" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Salary</td>
+                    <td><input type="number" name="Salary" class="form-control" placeholder="Salary" required></td>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td><input type="text" name="Location" class="form-control" placeholder="Location" required></td>
+                </tr>
+                <tr>
+                    <td>Skills</td>
+                    <td><input type="text" name="Skills" class="form-control" placeholder="Skills" required></td>
+                </tr>
+                <tr>
+                    <td>Start Date</td>
+                    <td><input type="date" name="Start_date" class="form-control" placeholder="Start Date" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>End Date</td>
+                    <td><input type="date" name="End_date" class="form-control" placeholder="End Date" required></td>
+                </tr>
+                <tr>
+                    <td>Job Category</td>
+                    <td>
+                        <select name="category_name" required>
+                            {% for category in categories %}
+                                <option value="{{ category.Category_name }}">{{ category.Category_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+               </tr>
+               <tr>
+                <td> Company Logo</td>
+                <td>
+                    <input type="file" name="image" required>
+                </td>
+               </tr>
+               
+                <tr>
+                    <td colspan="2" class="text-center">
+                        <input type="submit" value="POST" class="btn btn-primary btn-big">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

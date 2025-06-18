@@ -1,0 +1,25 @@
+{% extends "recruiter/recruiter_home.html" %}
+{% block header %}
+{% endblock %}
+{% block content %}
+<body><br><br>
+    <table class="table table-bordered">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>Resume</th>
+        </tr>
+        {% for applicant in applicants %}
+        <tr>
+            <td>{{ applicant.First_Name }}</td>
+            <td>{{ applicant.Last_Name }}</td>
+            <td>{{ applicant.Email }}</td>
+            <td>{{ applicant.PhNo }}</td>
+            <td>  <a href="{{ applicant.resume.url }}" >Download Resume</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body><br><br><br><br>
+{%endblock%}
